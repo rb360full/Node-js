@@ -1,4 +1,7 @@
+const { trace } = require('console');
 const http = require('http');
+const { parse } = require('path');
+const url = require('url');
 const database = {
     users: [
         { id: 1, user: 'reza', age: 40, password: 'rez128445' },
@@ -14,6 +17,11 @@ const database = {
 }
 
 const httpServer = http.createServer((req, res) => {
+
+    const urlString = url.parse(req.url, true).query
+    console.log('urlString : ', urlString);
+
+
     if (req.url === '/api/users') {
         const users = database.users
         res.write(JSON.stringify(users))
